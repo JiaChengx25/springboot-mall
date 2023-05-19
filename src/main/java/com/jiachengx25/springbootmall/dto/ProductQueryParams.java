@@ -15,4 +15,8 @@ public class ProductQueryParams {
     private String OrderBy;
 
     private String Sort;
+
+    private Integer limit;
+
+    private Integer offset;
 }

@@ -31,20 +31,27 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
 
+        //查詢條件
         if(productQueryParams.getCategory() != null){
             sql += " AND category = :category";
             map.put("category", productQueryParams.getCategory().name());
         }
-
         if(productQueryParams.getSearch() != null){
             sql += " AND product_name LIKE :search";
             map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
 
+        //排序
         //注意 只能用字串拼接SQL語句
         //不用檢查 null 因為有給 defaultValue
         sql += " Order By " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
-        System.out.println(sql);
+
+        //分頁
+        //limit 要寫在排序後面
+        sql += " LIMIT :limit OFFSET :offset";
+        map.put("limit", productQueryParams.getLimit());
+        map.put("offset", productQueryParams.getOffset());
+
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
         return productList;
