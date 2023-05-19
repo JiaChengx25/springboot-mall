@@ -1,6 +1,6 @@
-package com.jiachengx25.springbootmall.RowMapper;
+package com.jiachengx25.springbootmall.rowmapper;
 
-import com.jiachengx25.springbootmall.Model.Product;
+import com.jiachengx25.springbootmall.model.Product;
 import com.jiachengx25.springbootmall.constant.ProductCategory;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -12,7 +12,7 @@ public class ProductRowMapper implements RowMapper {
     @Override
     public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
         Product product = new Product();
-
+        product.setProduct_id(rs.getInt("product_id"));
         product.setProduct_name(rs.getString("product_name"));
         String categoryStr = rs.getString("category");
         ProductCategory category = ProductCategory.valueOf(categoryStr);
