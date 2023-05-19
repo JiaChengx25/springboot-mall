@@ -12,4 +12,7 @@ public class ProductQueryParams {
 
     private String search;
 
+    private String OrderBy;
+
+    private String Sort;
 }
