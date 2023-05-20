@@ -1,5 +1,6 @@
 package com.jiachengx25.springbootmall.service;
 
+import com.jiachengx25.springbootmall.dto.UserLoginRequest;
 import com.jiachengx25.springbootmall.dto.UserRegisterRequest;
 import com.jiachengx25.springbootmall.model.User;
 
@@ -9,6 +10,6 @@ public interface UserService {
 
     Integer register(UserRegisterRequest userRegisterRequest);
 
-
+    User login(UserLoginRequest userLoginRequest);
 
 }

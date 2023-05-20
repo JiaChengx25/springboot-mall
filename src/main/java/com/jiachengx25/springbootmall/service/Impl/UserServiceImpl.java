@@ -1,6 +1,7 @@
 package com.jiachengx25.springbootmall.service.Impl;
 
 import com.jiachengx25.springbootmall.dao.UserDao;
+import com.jiachengx25.springbootmall.dto.UserLoginRequest;
 import com.jiachengx25.springbootmall.dto.UserRegisterRequest;
 import com.jiachengx25.springbootmall.model.User;
 import com.jiachengx25.springbootmall.service.UserService;
@@ -38,4 +39,21 @@ public class UserServiceImpl implements UserService {
         return userDao.createUser(userRegisterRequest);
     }
 
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if(user == null) {
+            log.warn("該 email {} 尚未註冊", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if(user.getPassword().equals(userLoginRequest.getPassword())) {
+            return user;
+        }else {
+            log.warn("該 email {} 密碼不正確", userLoginRequest.getPassword());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
