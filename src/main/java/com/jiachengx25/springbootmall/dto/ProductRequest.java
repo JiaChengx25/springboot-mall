@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
+
 @Getter
 @Setter
 public class ProductRequest {
@@ -19,5 +20,6 @@ public class ProductRequest {
     private int price;
     @NotNull
     private int stock;
+
     private String description;
 }

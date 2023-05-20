@@ -31,8 +31,8 @@ public class ProductController {
             @RequestParam(required = false) String search,
 
             //排序
-            @RequestParam(defaultValue = "created_date") String OrderBy,
-            @RequestParam(defaultValue = "desc") String Sort,
+            @RequestParam(defaultValue = "created_date") String orderBy,
+            @RequestParam(defaultValue = "desc") String sort,
 
             //分頁
             //有加Max Min 記得要寫@Validated
@@ -42,8 +42,8 @@ public class ProductController {
         ProductQueryParams productQueryParams = new ProductQueryParams();
         productQueryParams.setCategory(category);
         productQueryParams.setSearch(search);
-        productQueryParams.setOrderBy(OrderBy);
-        productQueryParams.setSort(Sort);
+        productQueryParams.setOrderBy(orderBy);
+        productQueryParams.setSort(sort);
         productQueryParams.setLimit(limit);
         productQueryParams.setOffset(offset);
 

@@ -9,8 +9,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class Product {
-    private Integer product_id;
-    private String product_name;
+    private Integer productId;
+    private String productName;
     private ProductCategory category;
     private String imageUrl;
     private int price;
