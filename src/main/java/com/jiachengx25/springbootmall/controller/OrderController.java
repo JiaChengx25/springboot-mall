@@ -2,6 +2,7 @@ package com.jiachengx25.springbootmall.controller;
 
 import com.jiachengx25.springbootmall.dto.BuyItem;
 import com.jiachengx25.springbootmall.dto.CreateOrderRequest;
+import com.jiachengx25.springbootmall.model.Order;
 import com.jiachengx25.springbootmall.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class OrderController {
 
         Integer orderId = orderService.createOrder(userId, createOrderRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        Order order = orderService.getOrderById(orderId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 }
