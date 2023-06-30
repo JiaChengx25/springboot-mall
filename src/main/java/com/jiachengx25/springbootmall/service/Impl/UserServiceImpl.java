@@ -1,5 +1,6 @@
 package com.jiachengx25.springbootmall.service.Impl;
 
+import com.google.common.hash.Hashing;
 import com.jiachengx25.springbootmall.dao.UserDao;
 import com.jiachengx25.springbootmall.dto.UserLoginRequest;
 import com.jiachengx25.springbootmall.dto.UserRegisterRequest;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class UserServiceImpl implements UserService {
@@ -38,7 +41,13 @@ public class UserServiceImpl implements UserService {
         }
 
         //使用 MD5 生成密碼的雜湊值
-        String hashedPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
+        //String hashedPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
+
+        //改使用 SHA-256 生成密碼的雜湊值
+        String hashedPassword = Hashing.sha256()
+                .hashString(userRegisterRequest.getPassword(), StandardCharsets.UTF_8)
+                .toString();
+
         userRegisterRequest.setPassword(hashedPassword);
 
         //創建帳號
@@ -57,7 +66,12 @@ public class UserServiceImpl implements UserService {
         }
 
         //使用 MD5 生成密碼的雜湊值
-        String hashedPassword = DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes());
+        //String hashedPassword = DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes());
+
+        //使用 SHA-256 生成密碼的雜湊值
+        String hashedPassword = Hashing.sha256()
+                .hashString(userLoginRequest.getPassword(), StandardCharsets.UTF_8)
+                .toString();
 
         //檢查密碼
         if(user.getPassword().equals(hashedPassword)) {

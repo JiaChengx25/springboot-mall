@@ -8,7 +8,9 @@ import lombok.Setter;
 public class OrderQueryParams {
 
     private Integer userId;
+
     private Integer limit;
+
     private Integer offset;
 
 }
